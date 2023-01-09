@@ -17,11 +17,11 @@
 	--foreground-default: #F7F8F8;
 	--foreground-dimmer: #95A2B3;
 
-	--accent-primary: #331687;
-	--accent-primary-gradient: linear-gradient(180deg, #3F1D9E 0%, rgba(63, 29, 158, 0.32) 100%);
+	--accent-primary: #bb1102;
+	--accent-primary-gradient: linear-gradient(180deg, #bb1102 0%, rgba(255, 0, 0, 0.2) 100%);
 	
 	--accent-secondary: #B6AAD9;
-	--accent-secondary-gradient: linear-gradient(180deg, #572AD6 0%, rgba(87, 42, 214, 0.32) 100%);
+	--accent-secondary-gradient: linear-gradient(180deg, #bb1102 0%, rgba(255, 0, 0, 0.2) 100%);
 
 
 }
@@ -58,6 +58,7 @@ html, body {
 	background: var(--background-root);
 	font-size: 18px;
 	overflow-x: hidden;
+	scroll-behavior: smooth;	
 }
 
 h1 {
@@ -99,6 +100,12 @@ a {
 
 a:hover {
 	color: var(--foreground-default);
+}
+
+a:focus-visible {
+	outline: 2px solid var(--accent-secondary);
+	outline-offset: 4px;
+	border-radius: 16px;
 }
 
 a.button, button {
@@ -168,7 +175,7 @@ input:hover, textarea:hover {
 }
 
 input:focus, textarea:focus {
-	box-shadow: 0 0 0 2px #4e2eab;
+	box-shadow: 0 0 0 2px #bb1102;
 }
 
 
@@ -407,19 +414,29 @@ section.accent {
 	box-shadow: 0 3px 32px #000;
 }
 
+.container.bounce {
+	position: relative;
+	top: 0;
+	transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.container.bounce:hover {
+	top: -8px;
+}
+
 .container.highest {
 	background: var(--background-highest-gradient);
 }
 
 .container.accent {
 	background: var(--accent-primary-gradient);
-	box-shadow: 0px 3px 16px 0px #210E55;
+	box-shadow: 0px 3px 16px 0px #bb1102;
 	border: 1px solid var(--accent-primary)
 }
 
 .container.accent.highest {
 	background: var(--accent-secondary-gradient);
-	box-shadow: 0px 3px 8px 0px #301A6A;
+	box-shadow: 0px 3px 8px 0px #bb1102;
 	border: 1px solid var(--accent-primary)
 }
 
@@ -490,6 +507,18 @@ ion-icon {
 	height: 174px;
 }
 
+.reviews .flex.col.gap-32 {
+	position: relative;
+}
+
+.flex.col.gap-32 .scrim {
+		position: absolute;
+	background: linear-gradient(90deg, #000000 0%, rgba(0, 0, 0, 0) 14.58%, rgba(0, 0, 0, 0) 86.46%, #000000 100%);
+	height: 592px;
+	width: 100%;
+	z-index: 3;
+}
+
 .reviews .flex.col .flex.row:first-child, .reviews .flex.col .flex.row:last-child {
 /* 	padding-left: 300px; */
 	left: -200px;
@@ -524,7 +553,11 @@ ion-icon {
 footer {
 	background: var(--background-default);
 	border-top: 1px solid var(--background-highest);
-	padding: 128px 20%;
+	padding: 128px 10%;
+}
+
+footer a > div {
+	color: var(--foreground-default);
 }
 
 footer > div {
@@ -658,7 +691,7 @@ footer .flex.gap-32 ion-icon {
 
 .toggle {
 	background: var(--accent-primary-gradient);
-	box-shadow: 0px 3px 16px 0px #210e55;
+	box-shadow: 0px 3px 16px 0px #bb1102;
 	border: 1px solid var(--accent-primary);
 	border-radius: 16px;
 }
@@ -736,14 +769,36 @@ footer .flex.gap-32 ion-icon {
 	backdrop-filter: blur(100px);
 }
 
-@media only screen and (min-width: 2000px) {
+@media only screen and (min-width: 1500px) {
 	section, footer {
-		padding: 128px 20%;
+		padding: 128px 18%;
 	}
 
 	nav {
-		padding: 16px 20% !important;
-		width: calc(100% - 40%);
+		padding: 16px 18% !important;
+		width: calc(100% - 36%);
+	}
+}
+
+@media only screen and (min-width: 2000px) {
+	section, footer {
+		padding: 128px 25%;
+	}
+
+	nav {
+		padding: 16px 25% !important;
+		width: calc(100% - 50%);
+	}
+}
+
+@media only screen and (min-width: 3000px) {
+	section, footer {
+		padding: 128px 30%;
+	}
+
+	nav {
+		padding: 16px 30% !important;
+		width: calc(100% - 60%);
 	}
 }
 
@@ -814,7 +869,7 @@ footer .flex.gap-32 ion-icon {
 
 	.open .flex.gap-8 {
 		position: relative;
-		top: 3px;
+		top: 1px;
 	}
 
 	.open .flex.gap-32 {
@@ -870,6 +925,11 @@ footer .flex.gap-32 ion-icon {
 }
 
 @media only screen and (max-width: 600px) {
+	.open .flex.gap-8 {
+    position: relative;
+    top: 3px;
+	}
+	
 	section {
 		padding: 128px 32px;
 	}
@@ -1006,3 +1066,52 @@ footer .flex.gap-32 ion-icon {
 ::-webkit-scrollbar-thumb:hover {
 	background: var(--accent-secondary-gradient);
 }
+
+table {
+  background: var(--background-default);
+  color: var(--foreground-default);
+  border-collapse: collapse; /* removes cell borders */
+  width: 60%;
+  margin: 0 auto;
+  overflow-x: scroll;
+  
+}
+
+th {
+  background: var(--background-higher);
+  font-family: Switzer Bold;
+  font-size: 20px;
+  text-align: center;
+  padding: 30px;
+}
+
+td {
+  background: var(--background-default);
+  font-size: 16px;
+  padding: 20px;
+  text-align: center;
+}
+
+tr:nth-child(even) { /* applies to every even-numbered row */
+  background: var(--background-default-gradient);
+}
+
+tr:nth-child(odd) { /* applies to every odd-numbered row */
+  background: var(--background-default);
+}
+
+div-table {
+  display: flex;
+  justify-content: center;
+  overflow-x: scroll;
+}
+
+.a-team {
+	text-decoration: none;
+	color: white;
+	transition: color 0.1s ease-out;
+	line-height: 150%;
+	font-size: 16px;
+}
+
+
